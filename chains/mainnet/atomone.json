@@ -26,25 +26,5 @@
       "coingecko_id": "atone",
       "logo": "/logos/A1.svg"
     }
-  ],
-  "faucet": {
-    "amount": [
-      {
-        "amount": "10000000",
-        "denom": "uatone"
-      }
-    ],
-    "fees": {
-      "gas": "10000000000000",
-      "amount": [
-        {
-          "amount": "10000000",
-          "denom": "uatone"
-        }
-      ]
-    },
-    "ip_limit": "10",
-    "address_limit": "5",
-    "whitelist": ["atone19vf5mfr40awvkefw69nl6p3mmlsnacmmy86rk0"]
-  }
+  ]
 }
