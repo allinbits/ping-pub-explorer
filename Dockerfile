@@ -2,16 +2,12 @@ FROM node:23-alpine AS build
 
 WORKDIR /app
 
-# Set environment variables for non-interactive npm installs
-ENV YARN_CACHE_FOLDER=/root/.yarn/cache
+ENV YARN_CACHE_FOLDER=/root/.yarn
 RUN mkdir -p $YARN_CACHE_FOLDER
 
-RUN corepack enable
-RUN yarn set version stable
+COPY . /app
 
-COPY --chown=node . /app
-
-RUN --mount=type=cache,mode=0777,target=/root/.yarn yarn install --cache-folder ${YARN_CACHE_FOLDER} --frozen-lockfile
+RUN --mount=type=cache,mode=0777,target=/root/.yarn yarn install
 RUN --mount=type=cache,mode=0777,target=/root/.yarn yarn build
 
 ## Final image
