@@ -14,15 +14,16 @@ interface FaucetResponse {
 
 const address = ref('');
 const faucet = ref('');
-const balances = ref([]);
+const balances = ref({amount: 0, denom: ''});
 const faucetModal = ref(false);
 const ret = ref({} as FaucetResponse); 
 const configChecker = ref('');
 
 const checklist = computed(() => {
     const endpoint = chainStore.current?.endpoints?.rest
-    const bs = balances.value.length > 0 && balances.value.findIndex((v:any) => v.amount <= 10) === -1;
-    return [
+     // const bs = balances.value.length > 0 && balances.value.findIndex((v:any) => v.amount <= 10) === -1;
+     const bs = balances.value.denom !== '' && balances.value.amount >= 10
+     return [
         { title: 'Rest Endpoint', status: endpoint && endpoint[0].address !== '' },
         { title: 'Faucet Configured', status: chainStore.current?.faucet !== undefined },
         { title: 'Faucet Account', status: faucet.value !== ''},
@@ -42,34 +43,36 @@ const validAddress = computed(() => {
     return address.value.startsWith(chainStore.current?.bech32Prefix || '1');
 });
 
-const faucetUrl = computed(() => {
-    return `https://faucet.ping.pub/${chainStore.current?.chainName}`;
-    // return `http://localhost:3000/${chainStore.current?.chainName}`;
-});
+async function claim() {
+    const network = window.location.hostname.includes("testnet") ? "testnet" : "mainnet";
 
+     if (!address.value) {
+         return
+     }
 
-function claim() {
-    
-    ret.value = {} as FaucetResponse;
-    const prefix = chainStore.current?.bech32Prefix || 'cosmos';
-    if (!address.value ) return;
-    faucetModal.value = true;
-    // @ts-ignore
-    get(`${faucetUrl.value}/send/${address.value}`).then( (res: FaucetResponse) => {
-        console.log(res);
-        ret.value = res;
-    });
+        faucetModal.value = true;
+     try {
+         const res = await get(`/api/send/${network}/${chainStore.chainName}/${address.value}`)
+         console.log(res)
+     } catch (err) {
+        configChecker.value = err?.error;
+        console.error(err)
+     }
+    faucetModal.value = false;
 }
 
-function balance() {
-    get(`${faucetUrl.value}/balance`).then(res => {
-        if(res.status === 'error') {
-            configChecker.value = res.message;
-            return;
-        }
-        balances.value = res.result?.balance;
-        faucet.value = res.result?.address;
-    });
+async function balance() {
+    const network = window.location.hostname.includes("testnet") ? "testnet" : "mainnet";
+
+     try {
+        const res = await get(`/api/balance/${network}/${chainStore.chainName}`)
+
+         balances.value = res
+         faucet.value = res.address;
+     } catch (err) {
+        console.error(err)
+        configChecker.value = err;
+    }
 }
 
 onMounted(() => {
@@ -138,7 +141,7 @@ onMounted(() => {
                 <div class="mockup-code bg-base-200 my-2">
                     <pre data-prefix=">"><code class=" text-gray-800 dark:invert"> Faucet Address: {{ faucet }} </code></pre>
                     <pre
-                        data-prefix=">"><code class="text-gray-800 dark:invert"> Balances: {{ format.formatTokens(balances) }} </code></pre>
+                        data-prefix=">"><code class="text-gray-800 dark:invert"> Balances: {{ balances.amount }} {{ balances.denom }} </code></pre>
                 </div>
             </div>
         </div>
