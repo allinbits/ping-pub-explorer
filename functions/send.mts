@@ -85,8 +85,7 @@ export default async (_req: Request, context: Context) => {
     });
   } catch (err) {
     console.error(err);
-
-    return new Response(JSON.stringify({ error: err }), {
+    return new Response(`failed to send token: ${err}`, {
       status: 500,
     });
   }

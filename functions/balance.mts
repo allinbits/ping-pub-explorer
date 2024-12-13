@@ -1,4 +1,5 @@
 import { CosmosFaucet } from './pkg/faucet';
+import { Store } from './pkg/store';
 
 import type { Config, Context } from '@netlify/functions';
 import type { Blockchain } from './types/chain';
@@ -7,14 +8,13 @@ export const config: Config = {
   path: '/api/balance/:network/:chain_name',
 };
 
-export default async (_req: Request, context: Context) => {
+export default async (req: Request, context: Context) => {
   const { network, chain_name } = context.params;
 
   const mnemonic = Netlify.env.get('MNEMONIC');
   if (!mnemonic) {
-    console.log(`[ERROR] env: MNEMONIC is missing`);
-    return new Response(JSON.stringify({ error: `env: MNEMONIC is missing` }), {
-      status: 503,
+    return new Response(`env: MNEMONIC is missing`, {
+      status: 500,
     });
   }
 
@@ -23,13 +23,9 @@ export default async (_req: Request, context: Context) => {
   try {
     chain = await import(`../chains/${network}/${chain_name}.json`);
   } catch (err) {
-    console.log(`[ERROR] ${network}/${chain_name} not found`);
-    return new Response(
-      JSON.stringify({ error: `${network}/${chain_name} not found` }),
-      {
-        status: 400,
-      },
-    );
+    return new Response(`${network}/${chain_name} not found`, {
+      status: 400,
+    });
   }
 
   const faucet = new CosmosFaucet(chain, mnemonic);
@@ -50,10 +46,7 @@ export default async (_req: Request, context: Context) => {
       address: acc.address,
     });
   } catch (err) {
-    console.log(
-      `[ERROR] failed to get balance of account: ${acc.address}, ${err}`,
-    );
-    return new Response(JSON.stringify({ error: err }), {
+    return new Response(`error: ${err}`, {
       status: 500,
     });
   }

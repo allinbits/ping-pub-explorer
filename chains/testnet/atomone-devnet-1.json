@@ -31,10 +31,6 @@
       {
         "amount": "10000000",
         "denom": "uatone"
-      },
-      {
-        "amount": "10000000",
-        "denom": "uphoton"
       }
     ],
     "fees": {
@@ -42,12 +38,12 @@
       "amount": [
         {
           "amount": "250000",
-          "denom": "uphoton"
+          "denom": "uatone"
         }
       ]
     },
     "ip_limit": "10",
     "address_limit": "5",
-    "whitelist": []
+    "whitelist": ["atone14c7k4cvjpsx0vgrdsk9hhcc6qycq20rqx54sq3"]
   }
 }
