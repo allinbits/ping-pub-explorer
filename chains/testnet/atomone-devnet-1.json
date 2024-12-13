@@ -1,16 +1,15 @@
 {
-  "chain_name": "atomone",
-  "registry_name": "atomone",
+  "chain_name": "atomone-devnet-1",
   "api": [
     {
       "provider": "allinbits",
-      "address": "https://atomone-api.allinbits.services"
+      "address": "https://atomone-devnet-1-api.allinbits.services"
     }
   ],
   "rpc": [
     {
       "provider": "allinbits",
-      "address": "https://atomone-rpc.allinbits.services"
+      "address": "https://atomone-devnet-1-rpc.allinbits.services"
     }
   ],
   "sdk_version": "0.45.1",
@@ -23,7 +22,7 @@
       "base": "uatone",
       "symbol": "ATONE",
       "exponent": "6",
-      "coingecko_id": "atone",
+      "coingecko_id": "",
       "logo": "/logos/A1.svg"
     }
   ],
@@ -35,16 +34,16 @@
       }
     ],
     "fees": {
-      "gas": "10000000000000",
+      "gas": "100000000",
       "amount": [
         {
-          "amount": "10000000",
+          "amount": "250000",
           "denom": "uatone"
         }
       ]
     },
     "ip_limit": "10",
     "address_limit": "5",
-    "whitelist": ["atone19vf5mfr40awvkefw69nl6p3mmlsnacmmy86rk0"]
+    "whitelist": []
   }
 }
