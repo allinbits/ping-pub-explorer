@@ -1,5 +1,4 @@
 import { CosmosFaucet } from './pkg/faucet';
-import { Store } from './pkg/store';
 
 import type { Config, Context } from '@netlify/functions';
 import type { Blockchain } from './types/chain';
@@ -13,8 +12,8 @@ export default async (req: Request, context: Context) => {
 
   const mnemonic = Netlify.env.get('MNEMONIC');
   if (!mnemonic) {
-    return new Response(`env: MNEMONIC is missing`, {
-      status: 500,
+    return new Response(JSON.stringify({ error: `env: MNEMONIC is missing` }), {
+      status: 503,
     });
   }
 
@@ -23,9 +22,12 @@ export default async (req: Request, context: Context) => {
   try {
     chain = await import(`../chains/${network}/${chain_name}.json`);
   } catch (err) {
-    return new Response(`${network}/${chain_name} not found`, {
-      status: 400,
-    });
+    return new Response(
+      JSON.stringify({ error: `${network}/${chain_name} not found` }),
+      {
+        status: 400,
+      },
+    );
   }
 
   const faucet = new CosmosFaucet(chain, mnemonic);
@@ -46,7 +48,7 @@ export default async (req: Request, context: Context) => {
       address: acc.address,
     });
   } catch (err) {
-    return new Response(`error: ${err}`, {
+    return new Response(JSON.stringify({ error: err }), {
       status: 500,
     });
   }
