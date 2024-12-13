@@ -7,11 +7,12 @@ export const config: Config = {
   path: '/api/balance/:network/:chain_name',
 };
 
-export default async (req: Request, context: Context) => {
+export default async (_req: Request, context: Context) => {
   const { network, chain_name } = context.params;
 
   const mnemonic = Netlify.env.get('MNEMONIC');
   if (!mnemonic) {
+    console.log(`[ERROR] env: MNEMONIC is missing`);
     return new Response(JSON.stringify({ error: `env: MNEMONIC is missing` }), {
       status: 503,
     });
@@ -22,6 +23,7 @@ export default async (req: Request, context: Context) => {
   try {
     chain = await import(`../chains/${network}/${chain_name}.json`);
   } catch (err) {
+    console.log(`[ERROR] ${network}/${chain_name} not found`);
     return new Response(
       JSON.stringify({ error: `${network}/${chain_name} not found` }),
       {
@@ -48,6 +50,9 @@ export default async (req: Request, context: Context) => {
       address: acc.address,
     });
   } catch (err) {
+    console.log(
+      `[ERROR] failed to get balance of account: ${acc.address}, ${err}`,
+    );
     return new Response(JSON.stringify({ error: err }), {
       status: 500,
     });
