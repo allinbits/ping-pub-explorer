@@ -1,0 +1,49 @@
+{
+  "chain_name": "atomone-testnet-1",
+  "api": [
+    {
+      "provider": "allinbits",
+      "address": "https://atomone-testnet-1-api.allinbits.services"
+    }
+  ],
+  "rpc": [
+    {
+      "provider": "allinbits",
+      "address": "https://atomone-testnet-1-rpc.allinbits.services"
+    }
+  ],
+  "sdk_version": "0.45.1",
+  "coin_type": "118",
+  "min_tx_fee": "800",
+  "addr_prefix": "atone",
+  "logo": "/logos/A1.svg",
+  "assets": [
+    {
+      "base": "uatone",
+      "symbol": "ATONE",
+      "exponent": "6",
+      "coingecko_id": "",
+      "logo": "/logos/A1.svg"
+    }
+  ],
+  "faucet": {
+    "amount": [
+      {
+        "amount": "10000000",
+        "denom": "uatone"
+      }
+    ],
+    "fees": {
+      "gas": "100000000",
+      "amount": [
+        {
+          "amount": "250000",
+          "denom": "uatone"
+        }
+      ]
+    },
+    "ip_limit": "10",
+    "address_limit": "5",
+    "whitelist": []
+  }
+}
