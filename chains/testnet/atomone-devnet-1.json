@@ -31,6 +31,10 @@
       {
         "amount": "10000000",
         "denom": "uatone"
+      },
+      {
+        "amount": "10000000",
+        "denom": "uphoton"
       }
     ],
     "fees": {
@@ -38,7 +42,7 @@
       "amount": [
         {
           "amount": "250000",
-          "denom": "uatone"
+          "denom": "uphoton"
         }
       ]
     },
