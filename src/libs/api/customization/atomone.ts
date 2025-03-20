@@ -31,10 +31,10 @@ export const requests: Partial<RequestRegistry> = {
     //         return {inflation: String(Number(first?.apr|| "0")/100.0)}
     //     } 
     // },
-    gov_params_voting: { url: '/atomone/gov/v1beta1/params/voting', adapter },
-    gov_params_tally: { url: '/atomone/gov/v1beta1/params/tallying', adapter },
-    gov_params_deposit: { url: '/atomone/gov/v1beta1/params/deposit', adapter },
-    gov_proposals: { url: '/atomone/gov/v1beta1/proposals', adapter: async (source: any): Promise<PaginatedProposals> => {
+    gov_params_voting: { url: '/atomone/gov/v1/params/voting', adapter },
+    gov_params_tally: { url: '/atomone/gov/v1/params/tallying', adapter },
+    gov_params_deposit: { url: '/atomone/gov/v1/params/deposit', adapter },
+    gov_proposals: { url: '/atomone/gov/v1/proposals', adapter: async (source: any): Promise<PaginatedProposals> => {
       const proposals = source.proposals.map((p:any) => proposalAdapter(p))
       return {
           proposals,
@@ -42,7 +42,7 @@ export const requests: Partial<RequestRegistry> = {
       }
     }},
     gov_proposals_proposal_id: {
-      url: '/atomone/gov/v1beta1/proposals/{proposal_id}',
+      url: '/atomone/gov/v1/proposals/{proposal_id}',
       adapter: async (source: any): Promise<{proposal: GovProposal}> => {
           return {
               proposal: proposalAdapter(source.proposal)
@@ -50,19 +50,19 @@ export const requests: Partial<RequestRegistry> = {
       },
     },
     gov_proposals_deposits: {
-      url: '/atomone/gov/v1beta1/proposals/{proposal_id}/deposits',
+      url: '/atomone/gov/v1/proposals/{proposal_id}/deposits',
       adapter,
     },
     gov_proposals_tally: {
-      url: '/atomone/gov/v1beta1/proposals/{proposal_id}/tally',
+      url: '/atomone/gov/v1/proposals/{proposal_id}/tally',
       adapter,
     },
     gov_proposals_votes: {
-      url: '/atomone/gov/v1beta1/proposals/{proposal_id}/votes',
+      url: '/atomone/gov/v1/proposals/{proposal_id}/votes',
       adapter,
     },
     gov_proposals_votes_voter: {
-      url: '/atomone/gov/v1beta1/proposals/{proposal_id}/votes/{voter}',
+      url: '/atomone/gov/v1/proposals/{proposal_id}/votes/{voter}',
       adapter,
     },
 }

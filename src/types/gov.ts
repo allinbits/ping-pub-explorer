@@ -21,6 +21,7 @@ export interface GovParams {
 }
 
 export interface GovProposal {
+  id?: string;
   title?: string;
   summary?: string;
   proposal_id: string;

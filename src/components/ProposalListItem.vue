@@ -55,13 +55,13 @@ function metaItem(metadata: string|undefined): { title: string; summary: string 
               class="text-main text-base hover:text-indigo-400 cursor-pointer"
               @click="proposalInfo = item"
             >
-              #{{ item?.proposal_id }}</label
+              #{{ item?.proposal_id || item?.id }}</label
             >
           </td>
           <td class="w-full">
             <div>
               <RouterLink
-                :to="`/${chain.chainName}/gov/${item?.proposal_id}`"
+                :to="`/${chain.chainName}/gov/${item?.proposal_id || item?.id}`"
                 class="text-main text-base mb-1 block hover:text-indigo-400 truncate"
               >
                 {{ item?.content?.title || item?.title || metaItem(item?.metadata)?.title }}
@@ -121,7 +121,7 @@ function metaItem(metadata: string|undefined): { title: string; summary: string 
                 class="btn btn-xs btn-primary rounded-sm"
                 @click="
                   dialog.open('vote', {
-                    proposal_id: item?.proposal_id,
+                    proposal_id: item?.proposal_id || item?.id,
                   })
                 "
               >
@@ -147,7 +147,7 @@ function metaItem(metadata: string|undefined): { title: string; summary: string 
           class="text-main text-base mb-1 flex justify-between hover:text-indigo-400"
         >
           <RouterLink
-            :to="`/${chain.chainName}/gov/${item?.proposal_id}`"
+            :to="`/${chain.chainName}/gov/${item?.proposal_id || item?.id}`"
             class="flex-1 w-0 truncate mr-4"
             >{{ item?.content?.title || item?.title || metaItem(item?.metadata)?.title }}</RouterLink
           >
@@ -156,7 +156,7 @@ function metaItem(metadata: string|undefined): { title: string; summary: string 
             class="text-main text-base hover:text-indigo-400 cursor-pointer"
             @click="proposalInfo = item"
           >
-            #{{ item?.proposal_id }}</label
+            #{{ item?.proposal_id || item?.id }}</label
           >
         </div>
 
@@ -215,7 +215,7 @@ function metaItem(metadata: string|undefined): { title: string; summary: string 
               class="btn btn-xs btn-primary rounded-sm"
               @click="
                 dialog.open('vote', {
-                  proposal_id: item?.proposal_id,
+                  proposal_id: item?.proposal_id || item?.id,
                 })
               "
             >
