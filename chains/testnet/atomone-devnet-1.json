@@ -1,5 +1,6 @@
 {
   "chain_name": "atomone-devnet-1",
+  "pretty_name": "AtomOne Devnet-1",
   "api": [
     {
       "provider": "allinbits",
