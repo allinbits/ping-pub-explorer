@@ -25,6 +25,13 @@
       "exponent": "6",
       "coingecko_id": "",
       "logo": "/logos/A1.svg"
+    },
+    {
+      "base": "uphoton",
+      "symbol": "PHOTON",
+      "exponent": "6",
+      "coingecko_id": "",
+      "logo": "/logos/A1.svg"
     }
   ],
   "faucet": {

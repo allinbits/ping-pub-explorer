@@ -24,6 +24,13 @@
       "exponent": "6",
       "coingecko_id": "",
       "logo": "/logos/A1.svg"
+    },
+    {
+      "base": "uphoton",
+      "symbol": "PHOTON",
+      "exponent": "6",
+      "coingecko_id": "",
+      "logo": "/logos/A1.svg"
     }
   ],
   "faucet": {
@@ -31,6 +38,10 @@
       {
         "amount": "10000000",
         "denom": "uatone"
+      },
+      {
+        "amount": "10000000",
+        "denom": "uphoton"
       }
     ],
     "fees": {
@@ -39,6 +50,10 @@
         {
           "amount": "250000",
           "denom": "uatone"
+        },
+        {
+          "amount": "250000",
+          "denom": "uphoton"
         }
       ]
     },
