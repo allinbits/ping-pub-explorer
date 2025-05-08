@@ -48,11 +48,11 @@
       "gas": "100000000",
       "amount": [
         {
-          "amount": "250000",
+          "amount": "2500000",
           "denom": "uatone"
         },
         {
-          "amount": "250000",
+          "amount": "2500000",
           "denom": "uphoton"
         }
       ]
