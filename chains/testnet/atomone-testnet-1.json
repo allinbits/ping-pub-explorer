@@ -49,10 +49,6 @@
       "amount": [
         {
           "amount": "2500000",
-          "denom": "uatone"
-        },
-        {
-          "amount": "2500000",
           "denom": "uphoton"
         }
       ]
